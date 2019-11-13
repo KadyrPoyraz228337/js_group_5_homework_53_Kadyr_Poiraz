@@ -16,15 +16,18 @@ code {
 }
 
 .taskBlock {
+  position: relative;
   width: 100%;
   min-height: 100px;
+  padding: 5px;
   text-align: center;
   background: #fbfafb;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 4px 0px rgba(0,0,0,.5);
 }
 .bg {
-  display: inline-block;
+  position: absolute;
+  left: 42%;
   margin: 27px 0;
   font-size: 30px;
   color: #dbdbdb;
