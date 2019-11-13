@@ -10,6 +10,7 @@ class App extends Component {
     // this.tasks =
   }
   state = {
+    text: '',
     tasks: JSON.parse(localStorage.getItem('Tasks')) || [
       {content: 'Доделать д/з', isEdit: false, isCompleted: false, id: 1},
       {content: 'По хавать печеньки', isEdit: false, isCompleted: false, id: 2},
@@ -22,6 +23,8 @@ class App extends Component {
         <div className="container">
             <AddTAskForm
               onClick={() => this.addTask()}
+              input={event => this.changeText(event)}
+              text={this.state.text}
             />
             <div className="taskBlock">
               {this.state.tasks < 1 ? <p className="bg">Список пуст</p> : null}
@@ -59,25 +62,28 @@ class App extends Component {
     this.setState({tasks});
   };
 
-  addToLocalStorage = (tasks) => {
+  changeText = event => {
+    this.setState({text: event.target.value});
+  };
+
+  addToLocalStorage = tasks => {
     // tasks.map(task => task.isEdit = false);
     localStorage.setItem('Tasks', JSON.stringify(tasks));
   };
 
   addTask = () => {
-    let input = document.querySelector('#input');
-    if(input.value.length > 0) {
+    if(this.state.text.length > 0) {
       this.counter++;
 
       const tasks = [...this.state.tasks];
-      const newTask = {content: input.value, isEdit: false, isCompleted: false, id: this.counter};
+      const newTask = {content: this.state.text, isEdit: false, isCompleted: false, id: this.counter};
 
       tasks.push(newTask);
       this.addToLocalStorage(tasks);
 
       this.setState({tasks});
+      this.setState({text: ''});
 
-      input.value = '';
     }
   };
 
@@ -93,7 +99,7 @@ class App extends Component {
 
   };
 
-  removeItem = (id) => {
+  removeItem = id => {
     const tasks = [...this.state.tasks];
     const index = tasks.findIndex(e => e.id === id);
 
@@ -104,7 +110,7 @@ class App extends Component {
 
   };
 
-  editItem = (id) => {
+  editItem = id => {
     const tasks = [...this.state.tasks];
     const index = tasks.findIndex(e => e.id === id);
     const task = tasks[index];

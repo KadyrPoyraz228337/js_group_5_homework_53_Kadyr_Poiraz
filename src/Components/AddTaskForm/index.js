@@ -14,7 +14,7 @@ class AddTAskForm extends Component {
                             </h1>
                         </div>
                         <div className="form__inputBlock">
-                            <input type="text" className="form__input" id="input"/>
+                            <input type="text" className="form__input" value={addTask.text} onChange={addTask.input}/>
                             <button className="form__button" onClick={addTask.onClick}>Добавить</button>
                         </div>
                     </div>
