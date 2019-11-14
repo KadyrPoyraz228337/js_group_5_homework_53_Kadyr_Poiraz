@@ -6,8 +6,7 @@ import TaskItem from "./Components/TaskItem";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.counter = this.state.tasks.length;
-    // this.tasks =
+    this.counter = this.state.tasks[this.state.tasks.length-1].id;
   }
   state = {
     text: '',
